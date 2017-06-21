@@ -11,9 +11,9 @@ of number of cells) in the matrix?
 
 ___
 
-Sample :
+### Sample
 
-Input 
+Input :
 
 1 1 0 0 0
 
@@ -26,7 +26,7 @@ Input
 0 1 0 1 1
 
 
-Output 5
+Output : 5
 
 ___
 
