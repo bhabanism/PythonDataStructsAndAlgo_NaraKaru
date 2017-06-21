@@ -11,5 +11,5 @@ def bit_string(n):
         return (prepend('0' , bit_string(n-1)) + prepend('1' , bit_string(n-1)))
 
 
-print(bit_string(input("n = ")))
+print(bit_string(int(input("n = "))))
     
