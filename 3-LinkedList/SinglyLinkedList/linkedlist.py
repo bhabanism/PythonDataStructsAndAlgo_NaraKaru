@@ -66,6 +66,18 @@ class linkedlist:
         else:
             self.insertAtPOS(data, pos)
 
+    def findNodeAtPOS(self, pos):
+        if pos >= self.length() or pos < 0:
+            return None
+        
+        count = 0
+        current = self.head
+        while count < pos-1:
+            count += 1
+            current = current.next
+
+        return current.next
+
     def deleteFromBeginning(self):
         if self.length() == 0:
             raise ValueError('Nothing to delete, list empty')
@@ -84,8 +96,9 @@ class linkedlist:
 
             previous.next = None
 
+    
 
-    def
+    
 
 
 
