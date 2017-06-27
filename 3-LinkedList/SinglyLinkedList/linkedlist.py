@@ -1,6 +1,12 @@
-from node import node
 class linkedlist:
     head = None
+    class node:
+        data = None
+        next = None
+        def __init__(self, data):
+            self.data = data
+            self.Next = None
+
     def __init__(self):
         self.head = None
 
@@ -24,8 +30,8 @@ class linkedlist:
         return s.strip()
 
     
-    def insertAtBeginning(self, data):
-        newnode = node(data)
+    def __insertAtBeginning(self, data):
+        newnode = self.node(data)
         newnode.data = data
 
         if self.length() == 0:
@@ -34,8 +40,8 @@ class linkedlist:
             newnode.next = self.head
             self.head = newnode
 
-    def insertAtEnd(self, data):
-        newnode = node(data)
+    def __insertAtEnd(self, data):
+        newnode = self.node(data)
         current = self.head
 
         while current.next != None:
@@ -43,8 +49,8 @@ class linkedlist:
 
         current.next = newnode
 
-    def insertAtPOS(self, data, pos):
-        newnode = node(data)
+    def __insertAtPOS(self, data, pos):
+        newnode = self.node(data)
         count = 0
         current = self.head
         while count < pos-1:
@@ -60,11 +66,11 @@ class linkedlist:
             return None
         
         if pos == 0:
-            self.insertAtBeginning(data)
+            self.__insertAtBeginning(data)
         elif pos == self.length():
-            self.insertAtEnd(data)
+            self.__insertAtEnd(data)
         else:
-            self.insertAtPOS(data, pos)
+            self.__insertAtPOS(data, pos)
 
     def findNodeAtPOS(self, pos):
         if pos >= self.length() or pos < 0:
@@ -78,13 +84,13 @@ class linkedlist:
 
         return current.next
 
-    def deleteFromBeginning(self):
+    def __deleteFromBeginning(self):
         if self.length() == 0:
             raise ValueError('Nothing to delete, list empty')
         else:
             self.head = self.head.next
 
-    def deleteFromEnd(self):
+    def __deleteFromEnd(self):
         if self.length() == 0:
             raise ValueError('Nothing to delete, list empty')
         else:
@@ -95,6 +101,73 @@ class linkedlist:
                 current = current.next
 
             previous.next = None
+
+    def deleteNode(self, node):
+        if self.length() == 0:
+            raise ValueError('Nothing to delete, list empty')
+        else:
+            current = self.head
+            previous = None
+            found = False
+            while not found:
+                if current == node:
+                    found = True
+                elif current is None:
+                    raise ValueError('Node not in list')
+                else:
+                    previous = current
+                    current = current.next
+
+            if previous is None:
+                # head matches the node
+                self.head = current.next
+            else:
+                previous.next = current.next
+
+    def deleteNodeByValue(self, value):
+        current = self.head
+        previous = self.head
+        while current.next != None or current.data != value:
+            if current.data == value:
+                previous.next = current.next
+                return
+            else:
+                previous = current
+                current = current.next
+
+        raise ValueError('Value not present in list')
+
+
+    def deleteAtPOS(self, pos):
+        if pos == 0:
+           self.__deleteFromBeginning()
+           return
+        elif pos == self.length():
+           self.__deleteFromEnd()
+           return
+
+        count = 0
+        current = self.head
+        previous = self.head
+
+        if pos > self.length() or pos < 0:
+            raise ValueError('Invalid position ' + str(pos))
+        else:
+            while current.next != None or count < pos:
+                print("count " + str(count))
+                print("pos "  + str(pos))
+                
+                if count == pos:
+                    print("deleting " + str(current.data))
+                    previous.next = current.next
+                    return
+                else:
+                    count += 1
+                    previous = current
+                    current = current.next
+
+
+
 
     
 

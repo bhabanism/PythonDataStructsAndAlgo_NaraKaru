@@ -11,7 +11,12 @@ class linkedlist_test(unittest.TestCase):
         self.assertTrue(list.length() == 3)
         list.insert(15,3)
         node = list.findNodeAtPOS(1)
-        self.assertTrue(node.data == 5)                
+        self.assertTrue(node.data == 5)               
+        list.deleteNode(node)
+        list.deleteNodeByValue(10)
+        print(list.to_str())
+        list.deleteAtPOS(0)
+        self.assertTrue(list.length() == 1)
         print(list.to_str())
 
 if __name__ == '__main__':
